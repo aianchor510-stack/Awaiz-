@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Video Downloader</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap');
+
+        :root {
+            --primary-color: #0052FF;
+            --background-color: #F5F5F7;
+            --text-color: #1D1D1F;
+            --border-color: #E0E0E0;
+            --light-text-color: #8A8A8E;
+        }
+
+        body {
+            margin: 0;
+            font-family: 'Inter', sans-serif;
+            background-color: var(--background-color);
+            color: var(--text-color);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        .app-container {
+            width: 100%;
+            max-width: 400px; /* Typical mobile width */
+            height: 100vh;
+            max-height: 800px; /* Typical mobile height */
+            background-color: white;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+        }
+
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px;
+            border-bottom: 1px solid var(--border-color);
+            flex-shrink: 0;
+        }
+
+        .logo {
+            font-size: 24pt;
+            font-weight: 700;
+        }
+
+        .settings-icon {
+            font-size: 24px;
+            cursor: pointer;
+        }
+
+        main {
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .input-section {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        #url-input {
+            width: 100%;
+            padding: 15px;
+            border: 1px solid var(--border-color);
+            border-radius: 10px;
+            font-size: 16pt;
+            box-sizing: border-box;
+            text-align: center;
+        }
+
+        #url-input:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 3px rgba(0, 82, 255, 0.2);
+        }
+
+        .paste-button {
+            background: none;
+            border: none;
+            color: var(--primary-color);
+            font-size: 16pt;
+            font-weight: 600;
+            cursor: pointer;
+            text-align: center;
+        }
+
+        footer {
+            padding: 20px;
+            background-color: #ffffff;
+            border-top: 1px solid var(--border-color);
+            flex-shrink: 0;
+        }
+
+        .cta-button {
+            width: 100%;
+            padding: 15px;
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            border-radius: 12px;
+            font-size: 18pt;
+            font-weight: 600;
+            cursor: pointer;
+            margin-bottom: 20px;
+            transition: background-color 0.2s ease;
+        }
+
+        .cta-button:disabled {
+            background-color: #BDBDBD;
+            cursor: not-allowed;
+        }
+
+        .bottom-nav {
+            display: flex;
+            justify-content: space-around;
+        }
+
+        .nav-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-decoration: none;
+            color: var(--light-text-color);
+            gap: 5px;
+        }
+
+        .nav-item.active {
+            color: var(--primary-color);
+        }
+
+        .nav-item .icon {
+            font-size: 24px;
+        }
+
+        .nav-item .label {
+            font-size: 12pt;
+        }
+    </style>
+</head>
+<body>
+    <div class="app-container">
+        <header>
+            <div class="logo">Downloader</div>
+            <div class="settings-icon">⚙️</div>
+        </header>
+
+        <main>
+            <div class="input-section">
+                <input type="url" id="url-input" placeholder="Paste video link here">
+                <button class="paste-button">Paste from Clipboard</button>
+            </div>
+        </main>
+
+        <footer>
+            <button class="cta-button" id="fetch-button" disabled>Fetch Media</button>
+            <nav class="bottom-nav">
+                <a href="#" class="nav-item active">
+                    <span class="icon">🏠</span>
+                    <span class="label">Home</span>
+                </a>
+                <a href="#" class="nav-item">
+                    <span class="icon">📥</span>
+                    <span class="label">Downloads</span>
+                </a>
+            </nav>
+        </footer>
+    </div>
+    <script>
+        const urlInput = document.getElementById('url-input');
+        const fetchButton = document.getElementById('fetch-button');
+
+        urlInput.addEventListener('input', () => {
+            // Enable the button if the input is not empty
+            fetchButton.disabled = urlInput.value.trim() === '';
+        });
+    </script>
+</body>
+</html>
